@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intensive Aquaculture Supervising procedure</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('{{ url_for('static',filename='image.jpeg') }}');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #333; /* Text color on top of the background image */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ccc;
+            padding: 10px;
+        }
+
+        .header1{
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 100px;
+        }
+
+        .logo-right {
+            width: 100px;
+            height: 100px;
+        }
+
+        input[type="file"], button[type="submit"] {
+            background-color: #ccc; /* Grey background color for input and button */
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .video-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .video-frame {
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ url_for('static',filename='logo RIT.png') }}" alt="Logo RIT" class="logo">
+        <h1>AQUACULTURE</h1>
+        <img src="{{ url_for('static',filename='logo aquaculture.png') }}" alt="Logo Aquaculture" class="logo-right">
+    </div>
+
+    <h1 class="header1">FISH COUNTING APPLICATION</h1>
+    <form action="/count_fish" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="video/*" required>
+        <button type="submit">Count Fish</button>
+    </form>
+
+    <div class="video-container">
+        {% if total_count is defined %}
+            <h2>Fish Count: {{ total_count }}</h2>
+        {% endif %}
+    </div>
+
+    <!-- <div class="video-container">
+        {% if total_count %}
+            <h2>Fish Count for Each Frame:</h2>
+            <ul>
+                {% for count in total_count %}
+                    <li>Frame {{ loop.index }}: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div> -->
+    
+
+    {% if message %}
+        <h1>{{ message }}</h1>
+    {% endif %}
+</body>
+</html>
+
+
